@@ -1,3 +1,4 @@
+## To Do
 * email
 * only send email if > 10 sec
 * make the 5 sec sleep a param
@@ -18,4 +19,7 @@
 * error if the email isn't configured properly
 * somehow send a local LAN notification when connection goes down
 * check out the final script on https://unix.stackexchange.com/questions/190513/shell-scripting-proper-way-to-check-for-internet-connectivity
+create a "package" from github
 
+## Done
+----
