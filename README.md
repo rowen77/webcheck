@@ -1,12 +1,56 @@
 # webcheck
 
-Adding some notes like 'run it with ./webcheck &'
+A simple shell script to check your web connection and alert user of outages.
 
-installed msmtp and mailutils
-sudo nano /etc/msmtprc
+## Description
 
-echo 'message' | mail -s "raspi-buster" r---@gmail.com
-echo 'your message' | msmtp r---@yahoo.co.uk
+My home internet connection cuts out for ~2 minutes several times a week.  To save me from always
+finding out the hard way I wanted a tool which would constantly monitor the web connection from
+my raspberry pi and alert me immediately and/or record substantial outages by sending me emails.
+If the computer loses WiFi this shouldn't trigger an outage email.
 
-took some influence from
+### Dependencies
+
+```
+sudo apt-get msmtp
+sudo apt-get mailutils 
+```
+Don't forget to configure your smtp server:
+```
+sudo vi /etc/msmtprc
+```
+
+### Installing
+
+The `webcheck.sh` script can be stored anywhere.  
+Don't forget to `chmod +x` the script.  
+I like to store it in `~/bin` and create a symbolic link:
+```
+ln -s ~/bin/webcheck.sh ~/bin/webcheck
+```
+
+### Executing
+
+Run it with:
+
+```
+webcheck.sh &
+```
+
+## Help
+
+Output will be written to `~/.webcheck.log`
+
+## Author
+
+Richard Owen
+[@largeduck](https://twitter/largeduck)
+
+## Version History
+
+See `todo.md`
+
+## Ackknowledgements
+
+I took some inspiration from  
 https://unix.stackexchange.com/questions/190513/shell-scripting-proper-way-to-check-for-internet-connectivity
