@@ -22,7 +22,7 @@
 
 ## Done
 ### 2020-06-28
-* reduce logging - not on every check 
+* Don't log every network check
 ### 2020-06-27
 * Detect network down events
 * output to log
