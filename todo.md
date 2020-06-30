@@ -19,7 +19,7 @@
 * warning if the email address isn't configured properly
 * error on email fail
 * work out how to send a local LAN notification when connection goes down
-* create a installer "package" from github
+* create a installer "package" using github
 
 ## Done
 ### 2020-06-29
