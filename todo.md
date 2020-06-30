@@ -32,3 +32,4 @@
 * Timestamps in log
 * Measure/report outage and downtime
 * add to a github repo and use VSC
+
