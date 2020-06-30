@@ -22,8 +22,12 @@
 * create a installer "package" from github
 
 ## Done
+### 2020-06-29
+* add to a github repo and use VSC
+
 ### 2020-06-28
 * Don't log every network check
+
 ### 2020-06-27
 * Detect network down events
 * output to log
@@ -32,5 +36,3 @@
 * create the logfile if it doesn't exist
 * Timestamps in log
 * Measure/report outage and downtime
-* add to a github repo and use VSC
-
