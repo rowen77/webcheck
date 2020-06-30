@@ -1,5 +1,6 @@
 ## To Do
 * make the github repo work on dev branch by default
+* convert the github repo to ssh from https
 * make the 5 sec sleep a param
 * send email when web down
 * only send email if > 10 sec
