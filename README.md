@@ -31,10 +31,11 @@ ln -s ~/bin/webcheck.sh ~/bin/webcheck
 
 ### Executing
 
-Run it with:
+Run it alone or with a recipient email address:
 
 ```
 webcheck.sh &
+webcheck.sh name@example.com &
 ```
 
 ## Help
@@ -44,7 +45,7 @@ Output will be written to `~/.webcheck.log`
 ## Author
 
 Richard Owen
-[@largeduck](https://twitter/largeduck)
+[@largeduck](https://twitter.com/largeduck)
 
 ## Version History
 

@@ -1,10 +1,6 @@
 # List Of Things To Do
 ## To Do
 * make the github repo work on dev branch by default
-* make the target email address an command line argument
-* make it accept a list of comma separated email addresses
-* make the local ip check an optional switch
-* make the local ip check a command line arg
 * add a --help switch
 * add a man page
 * make it a service (crontab)
@@ -16,6 +12,11 @@
 * create a installer "package" using github
 
 ## Done
+### 2020-07-01
+* make the target email address a command line argument
+* allow email to be an optional parameter
+* accept a list of comma separated email addresses
+
 ### 2020-06-30
 * convert the github repo to ssh from https
 * make the 5 sec sleep a param
