@@ -123,9 +123,7 @@ reportOutage() {
     # Has the downtime reached the email threshhold?
     if [ $downtime -ge $emailThreshold ]
     then
-      # send an email
-      echo "$(date +'%Y-%m-%d %T') :  Sending email to $recipient" >> $log
-      mail -s "Connection down for $downtime seconds from $start to $end" -aFrom:Webcheck\<webcheck@linux\> $recipient <<< ''
+      sendMail
     else
       echo "$(date +'%Y-%m-%d %T') :  Email not sent: downtime is below threshold [$emailThreshold]" >> $log
     fi
@@ -133,6 +131,11 @@ reportOutage() {
   else
     echo "$(date +'%Y-%m-%d %T') :  Email not sent: recipient not specified" >> $log
   fi
+}
+
+sendMail() {
+  echo "$(date +'%Y-%m-%d %T') :  Sending email to $recipient" >> $log
+  mail -s "Connection down for $downtime seconds from $start to $end" -aFrom:Webcheck\<webcheck@linux\> $recipient <<< ''
 }
 
 main "$@"; exit
