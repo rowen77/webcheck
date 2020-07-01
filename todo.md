@@ -3,10 +3,8 @@
 * make the github repo work on dev branch by default
 * make the target email address an command line argument
 * make it accept a list of comma separated email addresses
-* don't send email if a local ip address is also unreachable
 * make the local ip check an optional switch
 * make the local ip check a command line arg
-* get the local gateway ip with /sbin/ip route | awk '/default/ { print $3 }'
 * add a --help switch
 * add a man page
 * make it a service (crontab)
@@ -23,8 +21,10 @@
 * make the 5 sec sleep a param
 * send email when web down
 * put params and data into the email subject line
-* only send email if > downtime threshold
+* only send email if downtime >= threshold
 * add the email params at the top of the file
+* get the local gateway ip
+* don't send email if a local ip address is also unreachable
 
 ### 2020-06-29
 * add to a github repo and use VSC

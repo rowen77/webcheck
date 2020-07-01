@@ -17,13 +17,18 @@ down=false
 up=false
 alert=false
 
+# get the local gateway ip
+gateway=$(/sbin/ip route | awk '/default/ { print $3 }')
+
 echo "---------------------------------------------" >> $log
 echo "$(date +'%Y-%m-%d %T') :  webcheck started" >> $log
+echo "$(date +'%Y-%m-%d %T') :  Gateway [$gateway]" >> $log
 
 while (true)
  do
     # Test the internet connection (1 quiet ping with a 2 sec timeout)
     if ping -q -c 1 -W 2 $targetSite >/dev/null; then
+      # The web connection is up
 
       # If we were DOWN before then record the interruption end time and mark comms UP
       if ($down) then
@@ -40,29 +45,43 @@ while (true)
         fi
       fi
     else
-      echo "$(date +'%Y-%m-%d %T') :  Connection DOWN" >> $log
+      # The web connection is down
 
-      # If we were UP before then record the interruption start time and mark comms DOWN
-      if ($up) then
-        start=$(date +%T)
-        startEpoch=$(date +%s)
-        echo "$(date +'%Y-%m-%d %T') :  Start of interuption [$start]" >> $log
-        up=false
-        down=true
+      # Test the local gateway connection (1 quiet ping with a 1 sec timeout)
+      if ping -q -c 1 -W 1 $gateway >/dev/null; then
+        # The gateway is reachable (and web is down) so we can consider recording a new outage
+        echo "$(date +'%Y-%m-%d %T') :  Web connection DOWN / local gateway UP. Possible outage" >> $log
+
+        # If we were UP before then record the interruption start time and mark comms DOWN
+        if ($up) then
+          start=$(date +%T)
+          startEpoch=$(date +%s)
+          echo "$(date +'%Y-%m-%d %T') :  Start of interuption [$start]" >> $log
+          up=false
+          down=true
+        fi
+      else
+        # The gateway and the web are unreachable - do nothing as wifi is likely down
+        echo "$(date +'%Y-%m-%d %T') :  Web connection DOWN / local gateway DOWN. Do not record outage" >> $log
+        down=false
       fi
 
     fi
 
+    # Have we triggered an alert?
     if ($alert) then
+      
+      # Put something in the log
       downtime=$(($endEpoch-$startEpoch))
       echo "$(date +'%Y-%m-%d %T') :  Connection was down for $downtime seconds between $start and $end" >> $log
       echo "$(date +'%Y-%m-%d %T') :  Connection back UP" >> $log
 
+      # Has the downtime reached the email threshhold?
       if [ $downtime -ge $emailThreshold ]
       then
+        # send an email
         echo "$(date +'%Y-%m-%d %T') :  Sending email to $recipient" >> $log
-        subject="Connection down for $downtime seconds from $start to $end"
-        mail -s $subject -aFrom:Webcheck\<webcheck@pi\> $recipient <<< ''
+        mail -s "Connection down for $downtime seconds from $start to $end" -aFrom:Webcheck\<webcheck@pi\> $recipient <<< ''
       else
         echo "$(date +'%Y-%m-%d %T') :  Not sending email as downtime is below threshold [$emailThreshold]" >> $log
       fi
