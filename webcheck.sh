@@ -26,8 +26,7 @@ main() {
   echo "$(date +'%Y-%m-%d %T') :  $0 started" >> $log
 
   # Set up command line params if they exist
-  if  [ $# -gt 0 ]
-  then
+  if  [ $# -gt 0 ]; then
     argList $*
     recipient=$1
   fi
@@ -117,12 +116,10 @@ reportOutage() {
   echo "$(date +'%Y-%m-%d %T') :  Connection back UP" >> $log
 
   # Is an email address configured?
-  if [ $recipient != 'null' ]
-  then
+  if [ $recipient != 'null' ]; then
 
     # Has the downtime reached the email threshhold?
-    if [ $downtime -ge $emailThreshold ]
-    then
+    if [ $downtime -ge $emailThreshold ]; then
       sendMail
     else
       echo "$(date +'%Y-%m-%d %T') :  Email not sent: downtime is below threshold [$emailThreshold]" >> $log
