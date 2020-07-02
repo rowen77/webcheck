@@ -2,6 +2,7 @@
 ## To Do
 * make the github repo work on dev branch by default
 * add a --help switch
+* test it on something other than a raspberry pi
 * add a man page
 * make it a service (crontab)
 * put the params in a config file in /etc
