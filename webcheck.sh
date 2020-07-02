@@ -8,6 +8,7 @@
 # Settings
 log=~/.webcheck.log                 # log file
 targetSite=8.8.8.8                  # site to check connection (ip address or hostname)
+pingWait=4                          # ping timeout seconds
 checkInterval=5                     # seconds between each comms checks
 emailThreshold=15                   # minimum seconds of downtime before emai is sent
 recipient=null                      # email recipient is cmd line arg (null = disable)
@@ -31,14 +32,16 @@ main() {
     recipient=$1
   fi
 
+  echo "$(date +'%Y-%m-%d %T') :  Target site     [$targetSite]" >> $log
   echo "$(date +'%Y-%m-%d %T') :  Gateway         [$gateway]" >> $log
+  echo "$(date +'%Y-%m-%d %T') :  Ping timeout    [$pingWait]" >> $log
   echo "$(date +'%Y-%m-%d %T') :  Email recipient [$recipient]" >> $log
 
   # Do all the work
   while (true)
   do
-    # Test the internet connection (1 quiet ping with a 2 sec timeout)
-    if ping -q -c1 -W2 $targetSite >/dev/null; then
+    # Test the internet connection (1 quiet ping with a configurable timeout)
+    if ping -q -c1 -W$pingWait $targetSite >/dev/null; then
       # The web connection is up
       handleConnectionUp
     else
