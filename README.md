@@ -12,8 +12,7 @@ If the computer loses WiFi this shouldn't trigger an outage email.
 ### Dependencies
 
 ```
-sudo apt-get msmtp
-sudo apt-get mailutils 
+sudo apt-get install msmtp mailutils 
 ```
 Don't forget to configure your smtp server:
 ```
