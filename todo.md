@@ -9,7 +9,8 @@
 * put the params in a config file in /etc
 * check if email is possible (msmtp/mailutils dependencies)
 * warning if the email address isn't configured properly
-* error on email fail
+* on email fail write a meaningful error in the log
+* only send email if the connection is up - or wait 10 seconds after reconnecting
 * work out how to send a local LAN notification when connection goes down
 * create a installer "package" using github
 
