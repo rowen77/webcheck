@@ -7,7 +7,8 @@ A simple shell script to check your web connection and alert user of outages.
 My home internet connection cuts out for ~2 minutes several times a week.  To save me from always
 finding out the hard way I wanted a tool which would constantly monitor the web connection from
 my raspberry pi and alert me immediately and/or record substantial outages by sending me emails.
-If the computer loses WiFi this shouldn't trigger an outage email.
+If the computer loses WiFi this shouldn't trigger an outage email because the broadband connection
+may still be reliable.
 
 ### Dependencies
 
